@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>$STARCK — I Am The Protocol</title>
+<meta name="description" content="$STARCK. The genius, billionaire, playboy, philanthropist of TON. Launching on DeDust. I don't need a bank — I am the protocol." />
+<link rel="icon" href="photo_2026-05-05_15-02-28.jpg" />
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Space+Grotesk:wght@400;500;700&family=VT323&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --ton-blue:#0098EA;
+    --ton-deep:#0A1F3A;
+    --ton-night:#050B1A;
+    --ton-white:#E8F4FF;
+    --ton-cyan:#5DE2FF;
+    --ton-yellow:#FFD93D;
+    --ton-pink:#FF4DA6;
+    --ton-green:#3DFF8E;
+    --grid-line:rgba(0,152,234,0.08);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{overflow-x:hidden}
+  body{
+    font-family:'Space Grotesk',sans-serif;
+    background:var(--ton-night);
+    color:var(--ton-white);
+    line-height:1.5;
+    background-image:
+      linear-gradient(var(--grid-line) 1px,transparent 1px),
+      linear-gradient(90deg,var(--grid-line) 1px,transparent 1px);
+    background-size:48px 48px;
+  }
+  ::selection{background:var(--ton-blue);color:#fff}
+
+  /* MARQUEE TOP */
+  .ticker{
+    background:var(--ton-yellow);
+    color:#000;
+    border-bottom:3px solid #000;
+    overflow:hidden;
+    white-space:nowrap;
+    font-family:'Bangers',cursive;
+    letter-spacing:2px;
+    font-size:18px;
+    padding:8px 0;
+  }
+  .ticker-track{display:inline-block;animation:scroll 30s linear infinite;padding-left:100%}
+  .ticker-track span{margin:0 28px}
+  @keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-100%)}}
+
+  /* NAV */
+  nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(5,11,26,0.85);
+    backdrop-filter:blur(12px);
+    border-bottom:2px solid var(--ton-blue);
+    padding:14px 32px;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .logo{display:flex;align-items:center;gap:12px;font-family:'Bangers',cursive;font-size:28px;letter-spacing:3px;color:var(--ton-cyan);text-shadow:0 0 14px var(--ton-blue)}
+  .logo img{width:42px;height:42px;border-radius:50%;border:2px solid var(--ton-blue);box-shadow:0 0 12px var(--ton-blue)}
+  .nav-links{display:flex;gap:28px;list-style:none}
+  .nav-links a{color:var(--ton-white);text-decoration:none;font-weight:700;font-size:15px;text-transform:uppercase;letter-spacing:1px;transition:all .2s}
+  .nav-links a:hover{color:var(--ton-cyan);text-shadow:0 0 8px var(--ton-cyan)}
+  .btn{
+    display:inline-block;
+    padding:12px 24px;
+    background:var(--ton-blue);
+    color:#fff;
+    border:3px solid #000;
+    border-radius:0;
+    font-family:'Bangers',cursive;
+    letter-spacing:2px;
+    font-size:18px;
+    text-decoration:none;
+    box-shadow:6px 6px 0 #000;
+    transition:all .15s;
+    cursor:pointer;
+  }
+  .btn:hover{transform:translate(-2px,-2px);box-shadow:8px 8px 0 #000}
+  .btn:active{transform:translate(4px,4px);box-shadow:2px 2px 0 #000}
+  .btn.alt{background:var(--ton-yellow);color:#000}
+  .btn.pink{background:var(--ton-pink);color:#fff}
+  .btn.green{background:var(--ton-green);color:#000}
+  @media(max-width:780px){.nav-links{display:none}}
+
+  /* HERO */
+  .hero{
+    position:relative;
+    padding:60px 32px 80px;
+    display:grid;grid-template-columns:1.1fr 1fr;
+    gap:48px;align-items:center;max-width:1280px;margin:0 auto;
+  }
+  .hero::before{
+    content:"";position:absolute;inset:-100px 0 0 0;height:600px;
+    background:radial-gradient(circle at 50% 30%,rgba(0,152,234,.35),transparent 70%);
+    z-index:-1;pointer-events:none;
+  }
+  .eyebrow{display:inline-block;background:var(--ton-pink);color:#fff;padding:6px 14px;font-family:'VT323',monospace;font-size:20px;letter-spacing:2px;border:2px solid #000;box-shadow:4px 4px 0 #000;margin-bottom:24px}
+  h1{
+    font-family:'Bangers',cursive;
+    font-size:clamp(56px,9vw,128px);
+    line-height:.95;
+    letter-spacing:2px;
+    margin-bottom:20px;
+    text-transform:uppercase;
+  }
+  h1 .stroke{-webkit-text-stroke:3px var(--ton-cyan);color:transparent;display:block}
+  h1 .blue{color:var(--ton-cyan);text-shadow:0 0 24px var(--ton-blue),6px 6px 0 #000}
+  .hero p.lead{font-size:20px;max-width:560px;margin-bottom:32px;color:#B6D4F0}
+  .hero-ctas{display:flex;gap:16px;flex-wrap:wrap}
+  .hero-img-wrap{position:relative;display:flex;justify-content:center}
+  .hero-img-wrap img{
+    width:100%;max-width:520px;
+    border:6px solid #000;border-radius:50%;
+    background:radial-gradient(circle,#0098EA 0%,#050B1A 70%);
+    box-shadow:14px 14px 0 var(--ton-blue),14px 14px 0 4px #000;
+    animation:float 5s ease-in-out infinite;
+  }
+  @keyframes float{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-18px) rotate(2deg)}}
+  .badge-spin{
+    position:absolute;top:-20px;right:-10px;
+    width:140px;height:140px;border-radius:50%;
+    background:var(--ton-yellow);border:4px solid #000;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Bangers',cursive;font-size:22px;color:#000;
+    text-align:center;line-height:1;
+    box-shadow:6px 6px 0 #000;
+    animation:spin 18s linear infinite;
+  }
+  @keyframes spin{to{transform:rotate(360deg)}}
+  @media(max-width:900px){.hero{grid-template-columns:1fr;padding:32px 20px 48px;text-align:center}.hero-ctas{justify-content:center}.badge-spin{width:110px;height:110px;font-size:18px}}
+
+  /* SECTIONS BASE */
+  section{padding:80px 32px;position:relative}
+  .container{max-width:1200px;margin:0 auto}
+  .section-title{
+    font-family:'Bangers',cursive;
+    font-size:clamp(40px,6vw,80px);
+    text-align:center;
+    margin-bottom:16px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+  }
+  .section-sub{text-align:center;font-size:18px;color:#9DB8D6;max-width:680px;margin:0 auto 48px}
+
+  /* QUOTE BANNER */
+  .quote-banner{
+    background:var(--ton-blue);
+    border-top:4px solid #000;border-bottom:4px solid #000;
+    padding:40px 24px;text-align:center;
+    transform:rotate(-1.2deg);margin:0 -10px;
+  }
+  .quote-banner p{
+    font-family:'Bangers',cursive;
+    font-size:clamp(28px,5vw,64px);
+    color:#fff;letter-spacing:2px;
+    text-shadow:4px 4px 0 #000;
+  }
+  .quote-banner small{display:block;margin-top:8px;font-family:'VT323',monospace;font-size:22px;color:var(--ton-yellow)}
+
+  /* ABOUT */
+  .about-grid{display:grid;grid-template-columns:1fr 1.3fr;gap:48px;align-items:center}
+  .about-card{
+    background:#0E2042;
+    border:4px solid var(--ton-blue);
+    padding:28px;
+    box-shadow:10px 10px 0 #000;
+    position:relative;
+  }
+  .about-card h3{font-family:'Bangers',cursive;font-size:32px;letter-spacing:2px;margin-bottom:14px;color:var(--ton-cyan)}
+  .about-card p{color:#C9DCF0;font-size:17px;margin-bottom:14px}
+  .about-card p:last-child{margin-bottom:0}
+  .about-img{
+    border:6px solid #000;
+    box-shadow:14px 14px 0 var(--ton-pink);
+    width:100%;
+    transform:rotate(2deg);
+  }
+  @media(max-width:900px){.about-grid{grid-template-columns:1fr}.about-img{transform:none}}
+
+  /* TOKENOMICS */
+  .tokenomics{background:linear-gradient(180deg,#050B1A 0%,#0A1F3A 100%);border-top:4px solid var(--ton-blue);border-bottom:4px solid var(--ton-blue)}
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:24px}
+  .stat{
+    background:var(--ton-night);
+    border:3px solid var(--ton-cyan);
+    padding:28px 18px;text-align:center;
+    box-shadow:6px 6px 0 var(--ton-blue);
+    transition:all .2s;
+  }
+  .stat:hover{transform:translate(-3px,-3px);box-shadow:9px 9px 0 var(--ton-blue)}
+  .stat .label{font-family:'VT323',monospace;font-size:20px;color:var(--ton-yellow);letter-spacing:1px}
+  .stat .value{font-family:'Bangers',cursive;font-size:36px;color:#fff;margin-top:6px;letter-spacing:2px;word-break:break-word}
+  .contract-box{
+    margin-top:40px;background:#000;border:3px solid var(--ton-yellow);
+    padding:20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;justify-content:space-between;
+    font-family:'VT323',monospace;font-size:22px;color:var(--ton-yellow);
+    box-shadow:8px 8px 0 var(--ton-blue);
+  }
+  .contract-box code{user-select:all;word-break:break-all;color:var(--ton-cyan)}
+  @media(max-width:780px){.stats{grid-template-columns:repeat(2,1fr)}}
+
+  /* ROADMAP */
+  .roadmap-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:40px}
+  .phase{
+    background:#0E2042;border:4px solid #000;
+    padding:24px;position:relative;
+    box-shadow:8px 8px 0 var(--ton-pink);
+  }
+  .phase:nth-child(2){box-shadow:8px 8px 0 var(--ton-yellow)}
+  .phase:nth-child(3){box-shadow:8px 8px 0 var(--ton-green)}
+  .phase:nth-child(4){box-shadow:8px 8px 0 var(--ton-cyan)}
+  .phase .num{
+    position:absolute;top:-22px;left:-18px;
+    width:54px;height:54px;border-radius:50%;
+    background:var(--ton-blue);color:#fff;border:3px solid #000;
+    font-family:'Bangers',cursive;font-size:28px;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:4px 4px 0 #000;
+  }
+  .phase h4{font-family:'Bangers',cursive;font-size:26px;letter-spacing:2px;margin:8px 0 14px;color:var(--ton-cyan)}
+  .phase ul{list-style:none}
+  .phase li{padding:6px 0 6px 22px;position:relative;color:#C9DCF0;font-size:15px}
+  .phase li::before{content:">>";position:absolute;left:0;color:var(--ton-yellow);font-family:'VT323',monospace;font-weight:700}
+  @media(max-width:980px){.roadmap-grid{grid-template-columns:1fr 1fr}}
+  @media(max-width:580px){.roadmap-grid{grid-template-columns:1fr}}
+
+  /* MEMES SECTION */
+  .memes{background:var(--ton-blue);border-top:4px solid #000;border-bottom:4px solid #000}
+  .memes .section-title{color:#fff;text-shadow:6px 6px 0 #000}
+  .memes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:40px}
+  .meme-card{
+    background:#fff;border:4px solid #000;padding:14px;
+    box-shadow:10px 10px 0 var(--ton-night);
+    transition:transform .2s;
+  }
+  .meme-card:hover{transform:rotate(-1deg) scale(1.02)}
+  .meme-card:nth-child(2):hover{transform:rotate(1deg) scale(1.02)}
+  .meme-card img{width:100%;display:block;border:3px solid #000}
+  .meme-card .caption{
+    margin-top:10px;font-family:'Bangers',cursive;
+    font-size:24px;color:#000;text-align:center;letter-spacing:1px;line-height:1.1;
+  }
+  @media(max-width:900px){.memes-grid{grid-template-columns:1fr}}
+
+  /* HOW TO BUY */
+  .buy-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:40px}
+  .step{
+    background:var(--ton-night);border:3px dashed var(--ton-cyan);
+    padding:24px;text-align:center;position:relative;
+  }
+  .step .step-num{
+    font-family:'Bangers',cursive;font-size:48px;
+    color:var(--ton-yellow);text-shadow:3px 3px 0 #000;
+    line-height:1;
+  }
+  .step h4{font-family:'Bangers',cursive;font-size:22px;margin:10px 0;letter-spacing:1px;color:var(--ton-cyan)}
+  .step p{font-size:14px;color:#B6D4F0}
+  @media(max-width:900px){.buy-steps{grid-template-columns:1fr 1fr}}
+  @media(max-width:520px){.buy-steps{grid-template-columns:1fr}}
+
+  /* FAQ */
+  .faq{max-width:880px;margin:0 auto}
+  details{
+    background:#0E2042;border:3px solid var(--ton-blue);
+    margin-bottom:14px;padding:18px 22px;
+    box-shadow:6px 6px 0 #000;cursor:pointer;
+  }
+  summary{
+    font-family:'Bangers',cursive;font-size:22px;letter-spacing:1.5px;
+    color:var(--ton-cyan);list-style:none;display:flex;justify-content:space-between;align-items:center;
+  }
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"+";font-size:32px;color:var(--ton-yellow);transition:transform .2s}
+  details[open] summary::after{content:"-"}
+  details p{margin-top:12px;color:#C9DCF0;font-size:16px}
+
+  /* COMMUNITY */
+  .community{background:linear-gradient(135deg,var(--ton-deep),#1a0d2e);border-top:4px solid var(--ton-pink);border-bottom:4px solid var(--ton-pink)}
+  .social-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:32px;max-width:880px;margin-left:auto;margin-right:auto}
+  .social{
+    background:var(--ton-night);border:3px solid #000;padding:22px 14px;text-align:center;
+    text-decoration:none;color:#fff;box-shadow:6px 6px 0 var(--ton-blue);
+    transition:all .15s;font-family:'Bangers',cursive;letter-spacing:2px;font-size:20px;
+  }
+  .social:hover{transform:translate(-3px,-3px);box-shadow:9px 9px 0 var(--ton-blue);color:var(--ton-cyan)}
+  .social .tag{display:block;font-family:'VT323',monospace;font-size:14px;color:var(--ton-yellow);margin-top:4px;letter-spacing:1px}
+
+  /* DISCLAIMER + FOOTER */
+  .disclaimer{padding:30px 24px;background:#000;border-top:3px solid var(--ton-yellow);text-align:center}
+  .disclaimer p{font-family:'VT323',monospace;color:#888;font-size:18px;max-width:880px;margin:0 auto;letter-spacing:1px}
+  footer{background:var(--ton-night);padding:40px 24px;text-align:center;border-top:3px solid var(--ton-blue)}
+  footer .logo{justify-content:center;margin-bottom:14px}
+  footer p{color:#7090b0;font-family:'VT323',monospace;font-size:18px}
+
+  /* FLOATING TON CHIPS BG */
+  .float-bg{position:fixed;inset:0;pointer-events:none;z-index:-1;overflow:hidden}
+  .chip{
+    position:absolute;
+    width:60px;height:60px;
+    border:2px solid var(--ton-blue);border-radius:50%;
+    opacity:.18;
+    animation:rise linear infinite;
+  }
+  .chip::after{
+    content:"";position:absolute;inset:14px;
+    background:linear-gradient(135deg,var(--ton-blue),var(--ton-cyan));
+    clip-path:polygon(50% 0,100% 100%,0 100%);
+  }
+  @keyframes rise{
+    0%{transform:translateY(110vh) rotate(0)}
+    100%{transform:translateY(-20vh) rotate(360deg)}
+  }
+</style>
+</head>
+<body>
+
+<div class="float-bg">
+  <div class="chip" style="left:5%;animation-duration:22s;animation-delay:0s"></div>
+  <div class="chip" style="left:18%;animation-duration:30s;animation-delay:4s;width:30px;height:30px"></div>
+  <div class="chip" style="left:34%;animation-duration:26s;animation-delay:8s;width:80px;height:80px"></div>
+  <div class="chip" style="left:55%;animation-duration:34s;animation-delay:2s"></div>
+  <div class="chip" style="left:72%;animation-duration:24s;animation-delay:11s;width:40px;height:40px"></div>
+  <div class="chip" style="left:88%;animation-duration:28s;animation-delay:6s;width:70px;height:70px"></div>
+</div>
+
+<div class="ticker">
+  <div class="ticker-track">
+    <span>I AM THE PROTOCOL</span><span>*</span>
+    <span>$STARCK ON TON</span><span>*</span>
+    <span>POWERED BY DEDUST</span><span>*</span>
+    <span>WAKE UP. HODL. BUILD. REPEAT.</span><span>*</span>
+    <span>GENIUS BILLIONAIRE PLAYBOY DEGEN</span><span>*</span>
+    <span>I DON'T NEED A BANK</span><span>*</span>
+    <span>$STARCK ON TON</span><span>*</span>
+    <span>POWERED BY DEDUST</span><span>*</span>
+  </div>
+</div>
+
+<nav>
+  <div class="logo">
+    <img src="photo_2026-05-05_15-02-28.jpg" alt="Stark logo" />
+    $STARCK
+  </div>
+  <ul class="nav-links">
+    <li><a href="#about">Lore</a></li>
+    <li><a href="#tokenomics">Tokenomics</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#how-to-buy">Buy</a></li>
+    <li><a href="#faq">FAQ</a></li>
+  </ul>
+  <a href="#how-to-buy" class="btn alt">Buy on DeDust</a>
+</nav>
+
+<header class="hero">
+  <div>
+    <span class="eyebrow">// LAUNCHING ON DEDUST</span>
+    <h1>
+      <span class="stroke">I Don't Need</span>
+      <span class="blue">A Bank.</span>
+      <span class="stroke">I Am The</span>
+      <span class="blue">Protocol.</span>
+    </h1>
+    <p class="lead">
+      Tony just woke up, plugged into TON, and decided centralized finance was beneath him.
+      $STARCK is the genius, billionaire, playboy, philanthropist meme of The Open Network.
+      Built different. Funded different. Yours, on DeDust.
+    </p>
+    <div class="hero-ctas">
+      <a href="#how-to-buy" class="btn">Suit Up & Buy</a>
+      <a href="#about" class="btn alt">Read The Lore</a>
+      <a href="#" class="btn pink">DeDust Pool</a>
+    </div>
+  </div>
+  <div class="hero-img-wrap">
+    <img src="photo_2026-05-05_15-02-28.jpg" alt="Tony Starck on TON" />
+    <div class="badge-spin">JARVIS<br/>APPROVED<br/>* * *</div>
+  </div>
+</header>
+
+<div class="quote-banner">
+  <p>"Yeah. I'm Kind Of A Big Deal."</p>
+  <small>— Tony Starck, somewhere on TON</small>
+</div>
+
+<section id="about">
+  <div class="container">
+    <h2 class="section-title">The Lore</h2>
+    <p class="section-sub">Every meme has an origin story. This one starts in a cave, with a box of scraps, and a TON wallet.</p>
+    <div class="about-grid">
+      <img src="photo_2026-05-05_15-02-29.jpg" class="about-img" alt="Tony Starck protocol" />
+      <div class="about-card">
+        <h3>Genius. Billionaire. Playboy. Degen.</h3>
+        <p>
+          They told him to use a bank. He laughed. He tried Ethereum. Too expensive.
+          He tried Solana. Too crowded. Then he found The Open Network — fast finality,
+          fees that don't insult him, and a community that actually ships.
+        </p>
+        <p>
+          So Tony Starck did what Tony Starck does best: he built the suit, plugged in the
+          arc reactor, and minted himself onto TON. No mock data. No premine theatrics.
+          No VC handshakes. Just a man, a meme, and a protocol.
+        </p>
+        <p>
+          $STARCK isn't a project. It's a posture. It's the energy of waking up, looking
+          at the chart, and saying out loud: <em>"I am the protocol."</em>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="tokenomics" class="tokenomics">
+  <div class="container">
+    <h2 class="section-title">Tokenomics</h2>
+    <p class="section-sub">Clean. Brutal. Honest. The way a billionaire would code it at 3am after the gala.</p>
+    <div class="stats">
+      <div class="stat"><div class="label">// TOTAL SUPPLY</div><div class="value">1,000,000,000</div></div>
+      <div class="stat"><div class="label">// TAX</div><div class="value">0 / 0</div></div>
+      <div class="stat"><div class="label">// LIQUIDITY</div><div class="value">100% LP</div></div>
+      <div class="stat"><div class="label">// CHAIN</div><div class="value">TON</div></div>
+    </div>
+    <div class="contract-box">
+      <span>&gt; CONTRACT:</span>
+      <code>EQ_______________TBA_at_DeDust_Launch_______________</code>
+      <a href="#" class="btn green">Copy CA</a>
+    </div>
+  </div>
+</section>
+
+<section id="roadmap">
+  <div class="container">
+    <h2 class="section-title">The Mission</h2>
+    <p class="section-sub">Tony doesn't do Q1, Q2, Q3. He does phases. Like a man building a future.</p>
+    <div class="roadmap-grid">
+      <div class="phase">
+        <div class="num">1</div>
+        <h4>Suit Up</h4>
+        <ul>
+          <li>Concept locked</li>
+          <li>Art forged</li>
+          <li>Site live</li>
+          <li>Community ignited</li>
+        </ul>
+      </div>
+      <div class="phase">
+        <div class="num">2</div>
+        <h4>Arc Reactor</h4>
+        <ul>
+          <li>DeDust pool</li>
+          <li>Fair launch</li>
+          <li>LP locked</li>
+          <li>First 1000 holders</li>
+        </ul>
+      </div>
+      <div class="phase">
+        <div class="num">3</div>
+        <h4>Avengers Assemble</h4>
+        <ul>
+          <li>CEX listings</li>
+          <li>Meme contests</li>
+          <li>Telegram raids</li>
+          <li>Brand collabs</li>
+        </ul>
+      </div>
+      <div class="phase">
+        <div class="num">4</div>
+        <h4>Endgame</h4>
+        <ul>
+          <li>$STARCK merch</li>
+          <li>Charity tranche</li>
+          <li>Top of TON</li>
+          <li>Build the future</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="memes">
+  <div class="container">
+    <h2 class="section-title">Meme Arsenal</h2>
+    <p class="section-sub" style="color:#0A1F3A">Right-click. Save. Post. Repeat. Every meme is a press release.</p>
+    <div class="memes-grid">
+      <div class="meme-card">
+        <img src="photo_2026-05-05_15-02-28.jpg" alt="Stark on TON" />
+        <div class="caption">"I Built This In A Cave."</div>
+      </div>
+      <div class="meme-card">
+        <img src="photo_2026-05-05_15-02-29.jpg" alt="I am the protocol" />
+        <div class="caption">"I Am The Protocol."</div>
+      </div>
+      <div class="meme-card">
+        <img src="photo_2026-05-05_15-02-28.jpg" alt="Wake up hodl build repeat" />
+        <div class="caption">"Wake Up. Hodl. Build. Repeat."</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="how-to-buy">
+  <div class="container">
+    <h2 class="section-title">How To Suit Up</h2>
+    <p class="section-sub">Four steps. No PhD required. Tony made it that way on purpose.</p>
+    <div class="buy-steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <h4>Get A TON Wallet</h4>
+        <p>Tonkeeper, MyTonWallet, or the Telegram wallet. Pick your suit.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <h4>Fund With TON</h4>
+        <p>Buy TON on any major exchange. Send it to your wallet.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <h4>Open DeDust</h4>
+        <p>Head to dedust.io. Connect. Paste the $STARCK contract above.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <h4>Become The Protocol</h4>
+        <p>Swap. Hold. Post memes. Welcome to the Stark Industries of TON.</p>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:48px">
+      <a href="#" class="btn">Open DeDust</a>
+      <a href="#" class="btn alt">Add To Wallet</a>
+    </div>
+  </div>
+</section>
+
+<div class="quote-banner" style="background:var(--ton-pink);transform:rotate(1deg)">
+  <p>"Sometimes You Gotta Run Before You Can Walk."</p>
+  <small style="color:#fff">— $STARCK whitepaper, page 1, only page</small>
+</div>
+
+<section id="faq">
+  <div class="container">
+    <h2 class="section-title">FAQ</h2>
+    <p class="section-sub">Tony already answered these in his head. Here they are out loud.</p>
+    <div class="faq">
+      <details>
+        <summary>Is $STARCK a serious investment?</summary>
+        <p>No. $STARCK is a meme coin. It is art, vibe, and culture. It has no intrinsic utility, no roadmap promises, and no expectation of profit. Buy it because you love the meme — not because someone told you it would moon.</p>
+      </details>
+      <details>
+        <summary>Why TON and why DeDust?</summary>
+        <p>TON is fast, cheap, and built around Telegram — where memes actually live. DeDust is the most credible native DEX on TON. It's where serious meme launches happen on the network. Tony picks tools that work.</p>
+      </details>
+      <details>
+        <summary>Is the liquidity locked?</summary>
+        <p>Yes. 100% of the liquidity goes into DeDust at launch and the LP is locked. There are no team allocations, no presale, and no shadow wallets. Stark Industries doesn't do shady.</p>
+      </details>
+      <details>
+        <summary>Will there be a CEX listing?</summary>
+        <p>If the community ships hard enough, the listings come on their own. Tony doesn't beg exchanges. He builds something they have to chase.</p>
+      </details>
+      <details>
+        <summary>Who is behind $STARCK?</summary>
+        <p>The community. Tony Starck is a meme — he is everyone who holds, posts, raids, and builds. There is no anonymous "team" pretending to be a startup. Just a culture.</p>
+      </details>
+      <details>
+        <summary>What does the brand stand for?</summary>
+        <p>Wake up. Hodl. Build. Repeat. Self-sovereignty over consent forms. Code over committees. Memes over manifestos.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="community">
+  <div class="container">
+    <h2 class="section-title">Join The Suit</h2>
+    <p class="section-sub">The protocol is people. Plug in.</p>
+    <div class="social-grid">
+      <a href="#" class="social">Telegram<span class="tag">@starck_ton</span></a>
+      <a href="#" class="social">X / Twitter<span class="tag">@starck_ton</span></a>
+      <a href="#" class="social">DeDust<span class="tag">/pools/starck</span></a>
+      <a href="#" class="social">Tonviewer<span class="tag">/jetton/starck</span></a>
+    </div>
+  </div>
+</section>
+
+<div class="disclaimer">
+  <p>
+    &gt; DISCLAIMER: $STARCK is a community meme token on The Open Network (TON). It has no association,
+    affiliation, sponsorship, or endorsement from Marvel, Disney, Robert Downey Jr., or any related entity.
+    "Tony Starck" is a parody persona. Cryptocurrencies are volatile. Do your own research.
+    Never invest more than you can afford to lose. This site is satire and culture — not financial advice.
+  </p>
+</div>
+
+<footer>
+  <div class="logo">
+    <img src="photo_2026-05-05_15-02-28.jpg" alt="Stark logo" />
+    $STARCK
+  </div>
+  <p>&copy; 2026 $STARCK on TON — Built by the protocol, for the protocol.</p>
+</footer>
+
+<script>
+  // Smooth scroll for anchors
+  document.querySelectorAll('a[href^="#"]').forEach(a=>{
+    a.addEventListener('click',e=>{
+      const id=a.getAttribute('href');
+      if(id.length>1){
+        const el=document.querySelector(id);
+        if(el){e.preventDefault();el.scrollIntoView({behavior:'smooth',block:'start'})}
+      }
+    });
+  });
+
+  // Copy CA button (placeholder — replace contract on launch)
+  const copyBtn=document.querySelector('.contract-box .btn');
+  if(copyBtn){
+    copyBtn.addEventListener('click',e=>{
+      e.preventDefault();
+      const code=document.querySelector('.contract-box code').textContent.trim();
+      navigator.clipboard.writeText(code).then(()=>{
+        const original=copyBtn.textContent;
+        copyBtn.textContent='Copied';
+        setTimeout(()=>copyBtn.textContent=original,1400);
+      }).catch(()=>{});
+    });
+  }
+</script>
+</body>
+</html>
